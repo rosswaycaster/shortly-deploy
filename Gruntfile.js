@@ -3,9 +3,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
-      dist: {
+      lib: {
         src: ['public/lib/jquery.js', 'public/lib/underscore.js', 'public/lib/backbone.js', 'public/lib/handlebars.js', 'public/client/*.js'],
-        dest: 'public/dist/build.js'
+        dest: 'public/dist/lib.js'
+      },
+      client: {
+        src: ['public/client/app.js', 'public/client/link.js', 'public/client/links.js', 'public/client/linkView.js', 'public/client/linksView.js', 'public/client/createLinkView.js', 'public/client/router.js'],
+        dest: 'public/dist/client.js'
       }
     },
 
@@ -26,12 +30,9 @@ module.exports = function(grunt) {
 
     uglify: {
       my_target: {
-        options: {
-          sourceMap: true,
-          sourceMapName: 'public/dist/build.min.map'
-        },
         files: {
-          'public/dist/build.min.js': ['public/dist/build.js']
+          'public/dist/lib.min.js': ['public/dist/lib.js'],
+          'public/dist/client.min.js': ['public/dist/client.js']
         }
       }
     },
