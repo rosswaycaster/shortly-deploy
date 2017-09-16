@@ -74,7 +74,7 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
-        command: "nodemon server.js"
+        command: "node server.js"
       }
     },
   });
