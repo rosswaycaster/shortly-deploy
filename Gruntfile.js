@@ -3,6 +3,10 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      dist: {
+        src: ['public/lib/*.js', 'public/client/*.js'],
+        dest: 'public/dist/build.js'
+      }
     },
 
     mochaTest: {
@@ -21,6 +25,15 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      my_target: {
+        options: {
+          sourceMap: true,
+          sourceMapName: 'public/dist/build.min.map'
+        },
+        files: {
+          'public/dist/build.min.js': ['public/dist/build.js']
+        }
+      }
     },
 
     eslint: {
@@ -30,6 +43,15 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
+      options: {
+        mergeIntoShorthands: false,
+        roundingPrecision: -1
+      },
+      target: {
+        files: {
+          'public/dist/style.min.css': ['public/style.css']
+        }
+      }
     },
 
     watch: {
@@ -51,6 +73,7 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+        command: "git push live master"
       }
     },
   });
